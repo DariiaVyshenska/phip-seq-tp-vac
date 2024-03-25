@@ -6,3 +6,5 @@ results/
 testing/
 testing*
 *.pyc
+outputDir/
+raw_test_data/
