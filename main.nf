@@ -14,7 +14,7 @@ nextflow.enable.dsl = 2
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-
+ include { CUTADAPT } from './modules/nf-core/cutadapt/main' 
 // include { PHIPSEQTPVAC  } from './workflows/phipseqtpvac'
 // include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_phipseqtpvac_pipeline'
 // include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_phipseqtpvac_pipeline'
@@ -108,8 +108,19 @@ workflow {
 
     // make sure to grab unzipped files if it's appropriate!
     def inputFastqDirABS = new File(params.inputFastaDir).getAbsolutePath()
-    fastqFileChannel = Channel.fromPath("${inputFastqDirABS}/**/*.fastq.gz")
-    fastqFileChannel.view {"Current file is: $it"}
+    // fastqFileChannel = Channel.fromPath("${inputFastqDirABS}/**/*.fastq.gz")
+
+    // fastqFileChannel = Channel.fromPath("${inputFastqDirABS}/**/*_L001_R{1,2}_001.fastq.gz")
+    Channel.fromFilePairs("${inputFastqDirABS}/**/*_L001_R{1,2}_001.fastq.gz")
+    .map { id, files -> tuple([id: id, single_end: files.size() == 1], files) }
+    .set{ fastq_pairs_ch }
+
+// RUNNING FROM COMMAND LINE
+// nextflow run main.nf --inputFastaDir raw_test_data -profile docker -c ~/nextflow_configs/learning.config; mv .nextflow.log* ./outputDir/pipeline_inf
+
+
+    // fastq_pairs_ch.view()
+    CUTADAPT(fastq_pairs_ch)
 
     // main:
 
