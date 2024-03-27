@@ -82,7 +82,6 @@ nextflow.enable.dsl = 2
 
 // need to make sure both absolute and relative paths are taken into account:
 // path types: ./data, data, /my/abs/path/data
-params.inputFastaDir = './data'
 
 // process showFilesInDir {
 //     // publishDir '/Users/mac_studio_np/Documents/nextflow_repos/phipseq/nf-core-phipseqtpvac/outputDir', mode: 'copy'
@@ -119,9 +118,27 @@ workflow {
 // RUNNING FROM COMMAND LINE
 // nextflow run main.nf --inputFastaDir raw_test_data -profile docker -c ~/nextflow_configs/learning.config; mv .nextflow.log* ./outputDir/pipeline_inf
 
-
-    // fastq_pairs_ch.view()
     CUTADAPT(fastq_pairs_ch)
+
+
+    // kallisto quant 
+    //     --index ./ref/tp_oligos_kallisto             => index file
+    //     -o ./tp_abundance/${sample}_kallisto         => output dir
+    //     --plaintext                                  => Output plaintext instead of HDF5
+    //     ./trim/${sample}_R1.fastq.gz                 => ...reads
+    //     ./trim/${sample}_R2.fastq.gz 
+
+
+    // mkdir -p $prefix && kallisto quant \\
+    //     --threads ${task.cpus} \\
+    //     --index ${index} \\
+    //     ${gtf_input} \\
+    //     ${chromosomes_input} \\
+    //     ${single_end_params} \\
+    //     ${strandedness} \\
+    //     ${args} \\
+    //     -o $prefix \\
+    //     ${reads} 2> >(tee -a ${prefix}/kallisto_quant.log >&2)
 
     // main:
 
