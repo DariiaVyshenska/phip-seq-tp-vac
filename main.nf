@@ -103,6 +103,7 @@ params.inputFastaDir = './data'
 // }
 
 
+
 workflow {
     // showFilesInDir | view { it }
 
