@@ -141,6 +141,10 @@ workflow {
 
 
 
+    // for future dev I can incorporate generating the index too:
+        // #make an index
+        // kallisto index yourindex.fasta -i output_filename
+
     // main:
 
 //     //
