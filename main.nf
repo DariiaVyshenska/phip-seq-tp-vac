@@ -103,7 +103,7 @@ nextflow.enable.dsl = 2
 // }
 
 
-
+// val a = Channel.value([null, file(params.kal_index_ref)])
 workflow {
     // make sure to grab unzipped files if it's appropriate!
     def inputFastqDirABS = new File(params.inputFastaDir).getAbsolutePath()
@@ -117,7 +117,6 @@ workflow {
 // nextflow run main.nf --inputFastaDir raw_test_data -profile docker -c ~/nextflow_configs/learning.config; mv .nextflow.log* ./outputDir/pipeline_inf
 
     CUTADAPT(fastq_pairs_ch)
-    // KALLISTO_QUANT(CUTADAPT.out.reads)
 
 
     // kallisto quant 
@@ -127,6 +126,13 @@ workflow {
     //     ./trim/${sample}_R1.fastq.gz                 => ...reads
     //     ./trim/${sample}_R2.fastq.gz 
 
+// "kallisto quant 
+// --threads 10 
+// --index tp_oligos_kallisto 
+// --plaintext 
+// -o 240215_beads_1_S5 
+// 240215_beads_1_S5_1.trim.fastq.gz 
+// 240215_beads_1_S5_2.trim.fastq.gz"
 
     // mkdir -p $prefix && kallisto quant \\
     //     --threads ${task.cpus} \\
@@ -138,7 +144,17 @@ workflow {
     //     ${args} \\
     //     -o $prefix \\
     //     ${reads} 2> >(tee -a ${prefix}/kallisto_quant.log >&2)
-
+    
+    KALLISTO_QUANT(
+        CUTADAPT.out.reads,
+        Channel.value([null, file(params.kal_index_ref)]),
+        "",
+        ""
+        // false,
+        // false,
+        // "",
+        // ""
+    )
 
 
     // for future dev I can incorporate generating the index too:
