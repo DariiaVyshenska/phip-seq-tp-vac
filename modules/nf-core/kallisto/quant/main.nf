@@ -10,6 +10,8 @@ process KALLISTO_QUANT {
     input:
     tuple val(meta), path(reads)
     tuple val(meta2), path(index)
+    path gtf
+    path chromosomes
     val fragment_length
     val fragment_length_sd
 
@@ -25,6 +27,8 @@ process KALLISTO_QUANT {
     script:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
+    def gtf_input = gtf.name != 'GTF_NO_FILE' ? "--gtf ${gtf}" : ''
+    def chromosomes_input = chromosomes.name != 'CHROMOSOMES_NO_FILE' ? "--chromosomes ${chromosomes}" : ''
 
     def single_end_params = ''
     if (meta.single_end) {
@@ -47,6 +51,9 @@ process KALLISTO_QUANT {
     mkdir -p $prefix && kallisto quant \\
             --threads ${task.cpus} \\
             --index ${index} \\
+            ${gtf_input} \\
+            ${chromosomes_input} \\
+            ${single_end_params} \\
             ${strandedness} \\
             ${args} \\
             -o $prefix \\
