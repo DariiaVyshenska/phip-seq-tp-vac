@@ -55,22 +55,18 @@ nextflow.enable.dsl = 2
     RUN MAIN WORKFLOW
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-
+params.indir = file(params.indir).toAbsolutePath()
+params.outdir = file(params.outdir).toAbsolutePath()
 
 workflow {
-    // need to make sure both absolute and relative paths are taken into account:
-    // path types: ./data, data, /my/abs/path/data
-
     // make sure to grab unzipped files if it's appropriate!
 
     // need to check if all mandatory inputs and files were passed/exist
 
-    Channel.fromFilePairs("${projectDir}/${params.inputFastaDir}/**/*_L001_R{1,2}_001.fastq.gz")
+    Channel.fromFilePairs("${params.indir}/*_R{1,2}.fastq.gz")
     .map { id, reads -> tuple([id: id, single_end: reads.size() == 1], reads) }
     .set{ fastq_pairs_ch }
 
-// RUNNING FROM COMMAND LINE
-// nextflow run main.nf --inputFastaDir raw_test_data -profile docker -c ~/nextflow_configs/learning.config; mv .nextflow.log* ./outputDir/pipeline_inf
 
     CUTADAPT(fastq_pairs_ch)
 
