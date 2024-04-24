@@ -8,5 +8,4 @@ testing*
 *.pyc
 outputDir/
 raw_test_data/
-conf/base.config
 README_tmp.txt
