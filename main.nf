@@ -59,9 +59,10 @@ params.indir = file(params.indir).toAbsolutePath()
 params.outdir = file(params.outdir).toAbsolutePath()
 
 workflow {
+    // set default ref to kalisto (aws link?) & set it as optional parameter from user
+    // need to check if all mandatory inputs and files were passed/exist
     // make sure to grab unzipped files if it's appropriate!
 
-    // need to check if all mandatory inputs and files were passed/exist
 
     Channel.fromFilePairs("${params.indir}/*_R{1,2}.fastq.gz")
     .map { id, reads -> tuple([id: id, single_end: reads.size() == 1], reads) }
