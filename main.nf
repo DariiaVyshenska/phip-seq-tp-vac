@@ -16,11 +16,16 @@ nextflow.enable.dsl = 2
 */
  include { CUTADAPT } from './modules/nf-core/cutadapt/main'
  include { KALLISTO_QUANT } from './modules/nf-core/kallisto/quant/main' 
+ include { PARSE_KALLISTO_OUTPUT } from './subworkflows/local/parse_kallisto_output/main'
 // include { PHIPSEQTPVAC  } from './workflows/phipseqtpvac'
 // include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_phipseqtpvac_pipeline'
 // include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_phipseqtpvac_pipeline'
 
 // include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_phipseqtpvac_pipeline'
+
+// processes - will need to extract them in separate files:
+
+
 
 /*
 
@@ -28,6 +33,8 @@ nextflow.enable.dsl = 2
     NAMED WORKFLOWS FOR PIPELINE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+
+
 
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
@@ -57,6 +64,7 @@ nextflow.enable.dsl = 2
 */
 params.indir = file(params.indir).toAbsolutePath()
 params.outdir = file(params.outdir).toAbsolutePath()
+params.target_keys = file(params.target_keys).toAbsolutePath()
 
 workflow {
     // set default ref to kalisto (aws link?) & set it as optional parameter from user
@@ -68,6 +76,9 @@ workflow {
     .map { id, reads -> tuple([id: id, single_end: reads.size() == 1], reads) }
     .set{ fastq_pairs_ch }
 
+    Channel.fromPath(params.target_keys)
+    .set{ library_target_keys_csv }
+
 
     CUTADAPT(fastq_pairs_ch)
 
@@ -78,8 +89,15 @@ workflow {
         params.kal_chromosomes,
         params.kal_fragment_length,
         params.kal_fragment_length_sd
-    )
+    ).results.map {meta, kallisto_out_path -> [kallisto_out_path]}.collect()
+    .map { files -> tuple([id: 'all_abundance_files'], files)}
+    .set { collected_results_ch }
 
+
+    PARSE_KALLISTO_OUTPUT(
+       collected_results_ch,
+       library_target_keys_csv
+    )
 
     // for future dev I can incorporate generating the index too:
         // #make an index
