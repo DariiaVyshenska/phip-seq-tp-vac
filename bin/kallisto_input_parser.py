@@ -24,9 +24,7 @@ def main(output_path, meta_path, kal_out_paths):
         except Exception as e:
           print(f"Error reading file {file_path}: {e}")
           continue
-        file_basename = os.path.basename(root)
-        basespace_suffx = r"_S\d+$"
-        sample_id = re.sub(basespace_suffx, "", file_basename)
+        sample_id = os.path.basename(root)
         curr_df.rename(columns={'est_counts': sample_id}, inplace=True)
         df_list.append(curr_df)
 
