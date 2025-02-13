@@ -15,6 +15,6 @@ process PARSE_KALLISTO_OUTPUT {
 
     script:
     """
-    python ${projectDir}/bin/kallisto_input_parser.py . ${keys_csv} ${all_paths} >> kallisto_parser.log 2>&1
+    python ${projectDir}/bin/kallisto_output_parser.py . ${keys_csv} ${all_paths} >> kallisto_parser.log 2>&1
     """
 }
