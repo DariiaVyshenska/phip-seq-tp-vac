@@ -62,7 +62,7 @@ workflow {
         args,
         params.outdir,
         params.input
-    )//.versions.view()  // I'll need to deal with versions - either delete it or use it
+    )
 
     //
     // WORKFLOW: Run main workflow
