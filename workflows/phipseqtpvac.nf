@@ -43,7 +43,7 @@ workflow PHIPSEQTPVAC {
 
 
     PARSE_KALLISTO_OUTPUT(
-        params.project_root,
+        params.project_bin,
         collected_results_ch,
         library_target_keys_csv
     )

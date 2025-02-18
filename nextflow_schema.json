@@ -219,10 +219,10 @@
             "type": "string",
             "default": "s3://fh-pi-jerome-k-eco/greninger-lab/greninger-lab-file-share/dariia/references/phipseq_ref_kallisto/dv_tp_library_keys_full20240502.csv"
         },
-        "project_root": {
+        "project_bin": {
             "type": "string",
             "description": "A path to pipeline root directory, ignored during validation"
         }
     },
-    "defaultIgnoreParams": ["test_param"]
+    "defaultIgnoreParams": ["project_bin"]
 }

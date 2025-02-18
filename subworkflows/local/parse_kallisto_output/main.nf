@@ -5,7 +5,7 @@ process PARSE_KALLISTO_OUTPUT {
     container 'docker.io/dariiavyshenska/python-phipseq'
 
     input:
-    val project_root 
+    val project_bin 
     tuple val(meta), path(all_paths)
     path keys_csv
 
@@ -16,6 +16,6 @@ process PARSE_KALLISTO_OUTPUT {
 
     script:
     """
-    python ${project_root}/bin/kallisto_output_parser.py . ${keys_csv} ${all_paths} >> kallisto_parser.log 2>&1
+    python ${project_bin}/kallisto_output_parser.py . ${keys_csv} ${all_paths} >> kallisto_parser.log 2>&1
     """
 }
