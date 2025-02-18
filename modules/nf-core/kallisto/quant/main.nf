@@ -17,8 +17,6 @@ process KALLISTO_QUANT {
 
     output:
     tuple val(meta), path("${prefix}")        , emit: results
-    tuple val(meta), path("*.run_info.json")  , emit: json_info
-    tuple val(meta), path("*.log")            , emit: log
     path "versions.yml"                       , emit: versions
 
     when:
@@ -58,9 +56,6 @@ process KALLISTO_QUANT {
             ${args} \\
             -o $prefix \\
             ${reads} 2> >(tee -a ${prefix}/kallisto_quant.log >&2)
-
-    cp ${prefix}/kallisto_quant.log ${prefix}.log
-    cp ${prefix}/run_info.json ${prefix}.run_info.json
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
