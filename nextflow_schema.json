@@ -197,6 +197,10 @@
             "type": "integer",
             "default": 66
         },
+        "cutadapt_minimum_len": {
+            "type": "integer",
+            "default": 20
+        },
         "kal_index_ref": {
             "type": "string",
             "default": "s3://fh-pi-jerome-k-eco/greninger-lab/greninger-lab-file-share/dariia/references/phipseq_ref_kallisto/tp_oligos_kallisto"

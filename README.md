@@ -36,7 +36,6 @@ CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
 
 Each row corresponds to a single sample (one pull-down) with its associated pair of FASTQ files for paired-end sequencing.
 
-
 Now, you can run the pipeline using:
 
 <!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
@@ -52,15 +51,25 @@ nextflow run nf-core/phipseqtpvac \
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
 > see [docs](https://nf-co.re/usage/configuration#custom-configuration-files).
 
-For more details and further functionality, please refer to the [usage documentation](https://nf-co.re/phipseqtpvac/usage) and the [parameter documentation](https://nf-co.re/phipseqtpvac/parameters).
+### The pipeline parameters and their default values:
+
+| Parameter  | Description | Default value |
+| ------------- | ------------- | ------------- |
+| `input`  | Path to the samplesheet with input data  | **Required** |
+| `outdir`  | Directory to save results  | `./results` |
+| `cutadapt_minimum_len` | Minimum read length after Cutadapt trimming | `20` |
+| `trimR1`  | Bases removed from the start of Forward reads (Cutadapt)  | `44` |
+| `trimR2`  | Bases removed from the start of Reverse reads (Cutadapt)  | `66` |
+| `kal_index_ref`  | Path to the Kallisto index file  | **Private (Greninger Lab)** |
+| `target_keys`  | Path to the PhiP-Seq library keys  | **Private (Greninger Lab)** |
 
 ## Pipeline output
 
-The pipeline generates separate output directories for results from Cutadapt, Kallisto, and the custom Kallisto output parsing program (`cutadapt_out`, `kallisto_out`, and `parsed_raw_counts`, respectively). Each directory contains the relevant quality control, trimming, or quantification files. Additionally, a unified count matrix (`kallisto_raw_counts_merged.csv`) is produced, summarizing feature counts across all input samples.
+The pipeline generates separate nested output directories for results from Cutadapt, Kallisto, and the custom Kallisto output parsing program (`cutadapt_out`, `kallisto_out`, and `parsed_raw_counts`, respectively). Each directory contains the relevant quality control, trimming, or quantification files. A unified count matrix (`parsed_raw_counts/kallisto_raw_counts_merged.csv`) is produced, summarizing feature counts across all input samples.
 
 ## Credits
 
-nf-core/phipseqtpvac was originally written by [@DariiaVyshenska](https://github.com/DariiaVyshenska).
+**nf-core/phipseqtpvac** was originally written by [@DariiaVyshenska](https://github.com/DariiaVyshenska).
 
 We thank the following people for their extensive assistance in the development of this pipeline: Thaddeus Armstrong, Ben Wieland, Alex Greninger.
 
