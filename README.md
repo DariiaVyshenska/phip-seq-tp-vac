@@ -38,14 +38,14 @@ Each row corresponds to a single sample (one pull-down) with its associated pair
 
 Now, you can run the pipeline using:
 
-<!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
-
 ```bash
 nextflow run nf-core/phipseqtpvac \
    -profile <docker/singularity/.../institute> \
    --input samplesheet.csv \
    --outdir <OUTDIR>
 ```
+
+To run a specific verion of the pipeline, use the appropriate tag: `nextflow run nf-core/phipseqtpvac -r <tag>`
 
 > [!WARNING]
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
