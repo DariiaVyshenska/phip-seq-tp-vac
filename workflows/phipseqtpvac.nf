@@ -38,7 +38,6 @@ workflow PHIPSEQTPVAC {
         params.kal_fragment_length,
         params.kal_fragment_length_sd
     ).results.map {_meta, kallisto_out_path -> [kallisto_out_path]}.collect()
-    .map { files -> tuple([id: 'all_abundance_files'], files)}
     .set { collected_results_ch }
 
 
