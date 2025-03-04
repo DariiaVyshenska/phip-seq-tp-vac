@@ -25,8 +25,9 @@ workflow PHIPSEQTPVAC {
 
     main:
 
-    Channel.fromPath(params.target_keys)
-    .set{ library_target_keys_csv }
+    // ch_versions = Channel.empty()
+    // ch_multiqc_files = Channel.empty()
+
 
     CUTADAPT(samplesheet)
 
@@ -44,7 +45,7 @@ workflow PHIPSEQTPVAC {
     PARSE_KALLISTO_OUTPUT(
         params.project_bin,
         collected_results_ch,
-        library_target_keys_csv
+        channel.fromPath(params.target_keys)
     )
 }
 
