@@ -21,7 +21,7 @@ jobs:
           workdir: s3://${{ secrets.AWS_S3_BUCKET }}/work/phipseqtpvac/work-${{ github.sha }}
           parameters: |
             {
-              "outdir": "s3://${{ secrets.AWS_S3_BUCKET }}/phipseqtpvac/results-test-${{ github.sha }}"
+              "outputDir": "s3://${{ secrets.AWS_S3_BUCKET }}/phipseqtpvac/results-test-${{ github.sha }}"
             }
           profiles: test
 

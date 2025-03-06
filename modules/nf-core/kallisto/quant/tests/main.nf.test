@@ -26,7 +26,7 @@ nextflow_process {
     test("sarscov2 single-end") {
         when {
             params{
-                outdir = "$outputDir"
+                outputDir = "$outputDir"
             }
 
             process {
@@ -62,7 +62,7 @@ nextflow_process {
     test("sarscov2 paired-end") {
         when {
             params{
-                outdir = "$outputDir"
+                outputDir = "$outputDir"
             }
 
             process {
