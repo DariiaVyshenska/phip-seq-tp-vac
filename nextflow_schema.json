@@ -203,15 +203,15 @@
         },
         "kal_index_ref": {
             "type": "string",
-            "default": "s3://fh-pi-jerome-k-eco/greninger-lab/greninger-lab-file-share/dariia/references/phipseq_ref_kallisto/tp_oligos_kallisto"
+            "default": "$projectDir/assets/tp_oligos_kallisto_idx"
         },
         "kal_gtf": {
             "type": "string",
-            "default": "/Users/mac_studio_np/Documents/nextflow_repos/phipseq/nf-core-phipseqtpvac/assets/GTF_NO_FILE"
+            "default": "$projectDir/assets/GTF_NO_FILE"
         },
         "kal_chromosomes": {
             "type": "string",
-            "default": "/Users/mac_studio_np/Documents/nextflow_repos/phipseq/nf-core-phipseqtpvac/assets/CHROMOSOMES_NO_FILE"
+            "default": "$projectDir/assets/CHROMOSOMES_NO_FILE"
         },
         "kal_fragment_length": {
             "type": "string"
@@ -221,7 +221,7 @@
         },
         "target_keys": {
             "type": "string",
-            "default": "s3://fh-pi-jerome-k-eco/greninger-lab/greninger-lab-file-share/dariia/references/phipseq_ref_kallisto/dv_tp_library_keys_full20240502.csv"
+            "default": "$launchDir/assets/dv_tp_library_keys_full20240502.csv"
         },
         "project_bin": {
             "type": "string",
