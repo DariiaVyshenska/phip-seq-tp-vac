@@ -7,6 +7,7 @@
 include { CUTADAPT } from '../modules/nf-core/cutadapt/main'
 include { KALLISTO_QUANT } from '../modules/nf-core/kallisto/quant/main' 
 include { PARSE_KALLISTO_OUTPUT } from '../subworkflows/local/parse_kallisto_output/main'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW

@@ -23,28 +23,6 @@ include { PHIPSEQTPVAC  } from './workflows/phipseqtpvac'
     NAMED WORKFLOWS FOR PIPELINE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-
-// WORKFLOW: Run main analysis pipeline depending on type of input
-
-workflow NFCORE_PHIPSEQTPVAC {
-
-    take:
-    samplesheet // channel: samplesheet read in from --input
-
-    main:
-
-    //
-    // WORKFLOW: Run pipeline
-    //
-    PHIPSEQTPVAC (
-        samplesheet
-    )
-
-    // emit:
-    // cutadapt = PHIPSEQTPVAC.out.cutadapt
-    // kallisto = PHIPSEQTPVAC.out.kallisto
-    // count_matrix = PHIPSEQTPVAC.out.count_matrix
-}
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -71,7 +49,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_PHIPSEQTPVAC (
+    PHIPSEQTPVAC (
         PIPELINE_INITIALISATION.out.samplesheet
     )
 

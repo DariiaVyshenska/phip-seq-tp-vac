@@ -28,7 +28,7 @@
                     "format": "directory-path",
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
                     "fa_icon": "fas fa-folder-open",
-                    "default": "/Users/mac_studio_np/Documents/nextflow_repos/phipseq/nf-core-phipseqtpvac/results"
+                    "default": "$launchDir/results"
                 }
             }
         },
@@ -221,7 +221,7 @@
         },
         "target_keys": {
             "type": "string",
-            "default": "$launchDir/assets/dv_tp_library_keys_full20240502.csv"
+            "default": "$projectDir/assets/dv_tp_library_keys_full20240502.csv"
         },
         "project_bin": {
             "type": "string",
