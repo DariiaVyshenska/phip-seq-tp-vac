@@ -55,7 +55,7 @@ jobs:
         run: |
           nf-core download ${{ env.REPO_LOWERCASE }} \
           --revision ${{ env.REPO_BRANCH }} \
-          --outdir ./${{ env.REPOTITLE_LOWERCASE }} \
+          --outputDir ./${{ env.REPOTITLE_LOWERCASE }} \
           --compress "none" \
           --container-system 'singularity' \
           --container-library "quay.io" -l "docker.io" -l "ghcr.io" \
@@ -69,4 +69,4 @@ jobs:
         env:
           NXF_SINGULARITY_CACHEDIR: ./
           NXF_SINGULARITY_HOME_MOUNT: true
-        run: nextflow run ./${{ env.REPOTITLE_LOWERCASE }}/$( sed 's/\W/_/g' <<< ${{ env.REPO_BRANCH }}) -stub -profile test,singularity --outdir ./results
+        run: nextflow run ./${{ env.REPOTITLE_LOWERCASE }}/$( sed 's/\W/_/g' <<< ${{ env.REPO_BRANCH }}) -stub -profile test,singularity --outputDir ./results

@@ -30,12 +30,10 @@ workflow PIPELINE_INITIALISATION {
     validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
     monochrome_logs   // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
-    outdir            //  string: The output directory where the results will be saved
-    input             //  string: Path to input samplesheet
+    outputDir            //  string: The output directory where the results will be saved
+    // input             //  string: Path to input samplesheet
 
     main:
-
-    ch_versions = Channel.empty()
 
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
@@ -43,7 +41,7 @@ workflow PIPELINE_INITIALISATION {
     UTILS_NEXTFLOW_PIPELINE (
         version,
         true,
-        outdir,
+        outputDir,
         workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1
     )
 
@@ -52,7 +50,7 @@ workflow PIPELINE_INITIALISATION {
     //
     pre_help_text = nfCoreLogo(monochrome_logs)
     post_help_text = '\n' + workflowCitation() + '\n' + dashedLine(monochrome_logs)
-    def String workflow_command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+    def String workflow_command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outputDir <OUTDIR>"
     UTILS_NFVALIDATION_PLUGIN (
         help,
         workflow_command,
@@ -98,7 +96,6 @@ workflow PIPELINE_INITIALISATION {
 
     emit:
     samplesheet = ch_samplesheet
-    versions    = ch_versions
 }
 
 /*

@@ -39,6 +39,11 @@ workflow NFCORE_PHIPSEQTPVAC {
     PHIPSEQTPVAC (
         samplesheet
     )
+
+    // emit:
+    // cutadapt = PHIPSEQTPVAC.out.cutadapt
+    // kallisto = PHIPSEQTPVAC.out.kallisto
+    // count_matrix = PHIPSEQTPVAC.out.count_matrix
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,8 +65,7 @@ workflow {
         params.validate_params,
         params.monochromeLogs,
         args,
-        params.outdir,
-        params.input
+        params.outputDir
     )
 
     //
@@ -70,6 +74,11 @@ workflow {
     NFCORE_PHIPSEQTPVAC (
         PIPELINE_INITIALISATION.out.samplesheet
     )
+
+    // publish:
+    // NFCORE_PHIPSEQTPVAC.out.cutadapt >> 'cutadapt'
+    // NFCORE_PHIPSEQTPVAC.out.kallisto >> 'kallisto'
+    // NFCORE_PHIPSEQTPVAC.count_matrix >> 'count_matrix'
 }
 
 /*

@@ -27,7 +27,7 @@ jobs:
           parameters: |
             {
               "hook_url": "${{ secrets.MEGATESTS_ALERTS_SLACK_HOOK_URL }}",
-              "outdir": "s3://${{ secrets.AWS_S3_BUCKET }}/phipseqtpvac/results-${{ github.sha }}"
+              "outputDir": "s3://${{ secrets.AWS_S3_BUCKET }}/phipseqtpvac/results-${{ github.sha }}"
             }
           profiles: test_full
 
