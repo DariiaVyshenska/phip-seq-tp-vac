@@ -18,12 +18,12 @@ workflow {
     main:
 
     PIPELINE_INITIALISATION (
-        params.version,
-        params.help,
+        // params.version,
+        // params.help,
         params.validate_params,
-        params.monochromeLogs,
-        args,
-        params.outputDir
+        // params.monochromeLogs,
+        args//,
+        // params.outputDir
     )
 
     PHIPSEQTPVAC (
