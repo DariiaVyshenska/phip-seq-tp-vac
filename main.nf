@@ -10,7 +10,7 @@
 nextflow.enable.dsl = 2
 
 
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_phipseqtpvac_pipeline'
+include { PIPELINE_INITIALISATION } from './subworkflows/local/utils'
 include { PHIPSEQTPVAC  } from './workflows/phipseqtpvac'
 
 workflow {

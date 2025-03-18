@@ -1,6 +1,6 @@
-include { CUTADAPT } from '../modules/nf-core/cutadapt/main'
-include { KALLISTO_QUANT } from '../modules/nf-core/kallisto/quant/main' 
-include { PARSE_KALLISTO_OUTPUT } from '../subworkflows/local/parse_kallisto_output/main'
+include { CUTADAPT } from '../modules/cutadapt/main'
+include { KALLISTO_QUANT } from '../modules/kallisto/quant/main' 
+include { PARSE_KALLISTO_OUTPUT } from '../modules/parse_kallisto_output/main'
 
 workflow PHIPSEQTPVAC {
     take:
