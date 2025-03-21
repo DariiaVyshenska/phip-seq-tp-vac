@@ -21,7 +21,6 @@ workflow PHIPSEQTPVAC {
     .set { collected_results_ch }
 
     PARSE_KALLISTO_OUTPUT(
-        params.project_bin,
         collected_results_ch,
         channel.fromPath(params.target_keys)
     )

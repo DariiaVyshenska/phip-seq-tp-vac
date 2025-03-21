@@ -222,11 +222,6 @@
         "target_keys": {
             "type": "string",
             "default": "$projectDir/assets/dv_tp_library_keys_full20240502.csv"
-        },
-        "project_bin": {
-            "type": "string",
-            "description": "A path to pipeline root directory, ignored during validation"
         }
-    },
-    "defaultIgnoreParams": ["project_bin"]
+    }
 }
