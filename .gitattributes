@@ -2,3 +2,5 @@
 *.nf.test linguist-language=nextflow
 modules/nf-core/** linguist-generated
 subworkflows/nf-core/** linguist-generated
+assets/dv_tp_library_keys_full20240502.csv filter=lfs diff=lfs merge=lfs -text
+assets/tp_oligos_kallisto_idx filter=lfs diff=lfs merge=lfs -text
