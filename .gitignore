@@ -9,6 +9,3 @@ testing*
 outputDir/
 raw_test_data/
 README_tmp.txt
-assets/phipseq_ref_kallisto/
-assets/dv_tp_library_keys_full20240502.csv
-assets/tp_oligos_kallisto_idx
