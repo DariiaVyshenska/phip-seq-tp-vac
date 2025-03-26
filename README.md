@@ -26,14 +26,14 @@ sample,fastq_1,fastq_2
 CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
 ```
 
-Each row corresponds to a single sample (one pull-down) with its associated pair of FASTQ files for paired-end sequencing.
+Each row corresponds to a single sample (one pull-down) with its associated pair of FASTQ files for paired-end sequencing. **Example samplesheet can be found in the `test_input` directory along with the test data.**
 
 Now, you can run the pipeline using:
 
 ```bash
 nextflow run nf-core/phipseqtpvac \
-   -profile <docker/singularity/.../institute> \
-   --input samplesheet.csv \
+   -profile <docker/singularity/...> \
+   --input example_samplesheet.csv \
    --outdir <OUTDIR>
 ```
 
@@ -52,8 +52,10 @@ To run a specific verion of the pipeline, use the appropriate tag: `nextflow run
 | `cutadapt_minimum_len` | Minimum read length after Cutadapt trimming | `20` |
 | `trimR1`  | Bases removed from the start of Forward reads (Cutadapt)  | `44` |
 | `trimR2`  | Bases removed from the start of Reverse reads (Cutadapt)  | `66` |
-| `kal_index_ref`  | Path to the Kallisto index file  | **Private (Greninger Lab)** |
-| `target_keys`  | Path to the PhiP-Seq library keys  | **Private (Greninger Lab)** |
+| `kal_index_ref`  | Path to the Kallisto index file  | See latest release `assets` archive |
+| `target_keys`  | Path to the PhiP-Seq library keys  | See latest release `assets` archive |
+
+`kal_index_ref` and `target_keys` files are provided in the `assets` archive of the latest release. The `kal_index_ref` file is a Kallisto index file for the PhiP-Seq library, and the `target_keys` file contains the PhiP-Seq library keys. The pipeline uses these files to quantify the PhiP-Seq library features.
 
 ## Pipeline output
 
